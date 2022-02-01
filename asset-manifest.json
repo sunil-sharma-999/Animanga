@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/animanga/static/css/main.4ddd85dc.css",
-    "main.js": "/animanga/static/js/main.2a323187.js",
+    "main.css": "/animanga/static/css/main.26ec41e0.css",
+    "main.js": "/animanga/static/js/main.f5aad028.js",
     "index.html": "/animanga/index.html",
-    "main.4ddd85dc.css.map": "/animanga/static/css/main.4ddd85dc.css.map",
-    "main.2a323187.js.map": "/animanga/static/js/main.2a323187.js.map"
+    "main.26ec41e0.css.map": "/animanga/static/css/main.26ec41e0.css.map",
+    "main.f5aad028.js.map": "/animanga/static/js/main.f5aad028.js.map"
   },
   "entrypoints": [
-    "static/css/main.4ddd85dc.css",
-    "static/js/main.2a323187.js"
+    "static/css/main.26ec41e0.css",
+    "static/js/main.f5aad028.js"
   ]
 }
