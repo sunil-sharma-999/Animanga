@@ -1,15 +1,16 @@
 import { Outlet, useParams } from 'react-router';
 import useFetch from '../hooks/useFetch';
 import { Link } from 'react-router-dom';
-import Card from '../components/UI/Card';
+import Card from '../components/Card';
 
-const Cards = ({ type }) => {
+const Cards = () => {
   const { id } = useParams(1);
-  const { data: results, loading, err } = useFetch(id);
-
+  const { data: results, loading, err, type } = useFetch(id);
+  const validDate =
+    !!results.length && isNaN(Date.parse(results[0].start_date));
   return (
     <>
-      <div className="arrows max-w-screen-lg  ">
+      <div className="arrows max-w-screen-lg flex justify-between text-white w-10/12 mt-8">
         <Link
           className={id === '1' || !id ? 'disabled' : ''}
           to={`/${type}/${+id - 1}`}>
@@ -20,9 +21,8 @@ const Cards = ({ type }) => {
       {loading && <h1 className="loading">Loading...</h1>}
       {!loading && err && <h1 className="err">{err}</h1>}
       {!loading && !err && (
-        <div className="cards max-w-screen-lg">
+        <div className="cards max-w-screen-lg flex flex-wrap justify-center w-full my-8 gap-8 px-8">
           {results.map((data) => {
-            const validDate = isNaN(Date.parse(data.start_date));
             const date = validDate
               ? (data.start_date + '-' + data.end_date).toString()
               : new Date(data.start_date).toLocaleDateString('en-US', {
@@ -34,26 +34,8 @@ const Cards = ({ type }) => {
                   month: 'short',
                   year: 'numeric',
                 });
-
             return (
-              <Card key={data.mal_id}>
-                <div className="img-wrap">
-                  <img src={data.image_url} alt={data.title} />
-                </div>
-                <div className="info-wrap">
-                  {data.rank && (
-                    <p className="rank text-xl text-black/80">#{data.rank}</p>
-                  )}
-                  <p className="title">{data.title}</p>
-                  <p className="date">{date}</p>
-                  <p className="score">Score: {data.score}</p>
-                </div>
-                <Link
-                  to={`/${type}/id/${data.mal_id}`}
-                  className="card-link w-full  p-4 text-center font-bold let tracking-wider hover:bg-purple-500 hover:text-white/90 roundin ">
-                  More Info
-                </Link>
-              </Card>
+              <Card key={data.mal_id} data={data} date={date} type={type} />
             );
           })}
         </div>

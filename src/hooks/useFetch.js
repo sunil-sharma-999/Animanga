@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { searchActions } from '../reducers/searchSlice';
+import { animangaActions } from '../store/slices/animangaSlice';
 
 const useFetch = (page = 1) => {
   const [loading, setLoading] = useState(true);
@@ -15,24 +15,24 @@ const useFetch = (page = 1) => {
       method: 'GET',
       url: !query
         ? `https://api.jikan.moe/v3/top/${type}/${page}`
-        : `https://api.jikan.moe/v3/search/${type}?q=${query}&page=${page}`,
+        : `https://api.jikan.moe/v3/search/${type}`,
+      params: query && { q: query, page: page },
     };
 
     axios
       .request(options)
       .then((response) => {
         const data = !!query ? response.data.results : response.data.top;
-        data && dispatch(searchActions.dataFunc(data));
-        setTimeout(() => {
-          setLoading(false);
-        }, 500);
+        data && dispatch(animangaActions.dataSet(data));
+        setLoading(false);
         setErr(false);
       })
       .catch(function (error) {
         setLoading(false);
+        setErr(error.response.statusText);
       });
-  }, [type, page, query]);
-  return { data, loading, err };
+  }, [type, page, query, dispatch]);
+  return { data, loading, err, type };
 };
 
 export default useFetch;

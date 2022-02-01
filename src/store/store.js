@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import searchReducer from '../reducers/searchSlice';
+import animangaReducer from './slices/animangaSlice';
 
 export const store = configureStore({
   reducer: {
-    animanga: searchReducer,
+    animanga: animangaReducer,
   },
 });
