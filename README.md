@@ -3,7 +3,7 @@
 ### Made with
 
 - ReactJS
-- React Rputer
+- React Router
 - Redux and Redux Toolkit
 - TailwindCSS
 - SCSS
