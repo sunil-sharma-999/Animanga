@@ -21,7 +21,7 @@ const Card = (props) => {
       </div>
       <Link
         to={`/${props.type}/id/${props.data.mal_id}`}
-        className="card-link w-full  p-4 text-center font-bold let tracking-wider hover:bg-purple-500 hover:text-white/90 roundin ">
+        className="card-link w-full  p-4 text-center font-bold let tracking-wider hover:bg-purple-500 hover:text-white/90 roundin mt-auto">
         More Info
       </Link>
     </div>

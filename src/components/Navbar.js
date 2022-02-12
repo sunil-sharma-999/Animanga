@@ -17,7 +17,7 @@ const Navbar = () => {
     dispatch(animangaActions.search(inputRef.current.value));
   };
   return (
-    <div className="nav-wrap bg-purple-500 shadow-slate-900 shadow-sm p-4 px-8 sticky top-0  flex items-center z-50 w-full">
+    <div className="nav-wrap bg-purple-500 shadow-slate-900 shadow-sm p-4 px-8 sticky top-0  flex items-center z-50 w-full ">
       <nav className="max-w-screen-lg flex-wrap flex justify-start w-full items-center m-auto ">
         <Link
           to="/manga/1"
@@ -26,7 +26,7 @@ const Navbar = () => {
             dispatch(animangaActions.clearQuery());
             dispatch(animangaActions.typeSet('manga'));
           }}
-          className="logo text-white mr-4  text-2xl">
+          className="logo text-white mr-auto sm:mr-8 text-2xl">
           <h1>Animanga</h1>
         </Link>
         <div className="links">
@@ -45,7 +45,7 @@ const Navbar = () => {
             Anime
           </NavLink>
         </div>
-        <form onSubmit={handler}>
+        <form onSubmit={handler} className="ml-0 sm:ml-auto">
           <input
             className="rounded-md px-4 py-2 outline-none mt-2 ml-0 sm:mt-0 sm:ml-auto w-72 border-none"
             type="text"

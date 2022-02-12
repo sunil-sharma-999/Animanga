@@ -1,0 +1,173 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+$mainBg: rgb(44, 44, 44);
+
+.err {
+  color: hsl(0, 94%, 73%);
+  background-color: white;
+  padding: 2rem;
+  border-radius: 4px;
+  margin-top: 2rem;
+}
+
+body {
+  background-color: white;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+    'Lucida Sans', Arial, sans-serif;
+}
+.app {
+  // background-color: $mainBg;
+  min-height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loading {
+  color: white;
+}
+// .navbar {
+// background-color: orange;
+// color: white;
+// box-shadow: 0px 3px 5px -2px black;
+// width: 100%;
+// padding: 1rem;
+// position: sticky;
+// top: 0;
+// flex-wrap: wrap;
+// display: flex;
+// align-items: center;
+// .logo {
+// text-decoration: none;
+// color: white;
+// margin-right: 1rem;
+//   }
+// }
+// .nav-wrap {
+// }
+// input {
+//   margin-left: auto;
+//   border: none;
+//   outline: none;
+//   width: 300px;
+//   padding: 0.5rem 1rem;
+//   border-radius: 0.2rem;
+//   font-family: inherit;
+// }
+.links {
+  a {
+    border-bottom: 2px solid transparent;
+    // text-decoration: none;
+    // border-radius: 2px;
+    // cursor: pointer;
+    // margin-right: 1rem;
+    color: white;
+    letter-spacing: 1px;
+    &.active {
+      color: black;
+      border-color: black;
+    }
+  }
+}
+// .cards {
+// padding: 0 2rem;
+// margin-block: 2rem;
+// width: 100%;
+// display: flex;
+// flex-wrap: wrap;
+// gap: 2rem;
+// justify-content: center;
+// .card-link {
+//   cursor: pointer;
+//   text-decoration: none;
+//   background-color: white;
+//   width: max-content;
+//   padding: 0.5rem 1rem;
+//   margin-top: 1rem;
+//   border-radius: 6px;
+// }
+// }
+.arrows {
+  // color: white;
+  // display: flex;
+  // width: 85%;
+  // margin-top: 2rem;
+  // justify-content: space-between;
+  a {
+    text-decoration: none;
+    color: black;
+    display: block;
+    opacity: 1;
+    background-color: white;
+    font-weight: 900;
+    padding: 0.4rem 1rem;
+    border: none;
+    display: flex;
+    border-radius: 0.2rem;
+    cursor: pointer;
+    &.disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    &:hover {
+      background-color: rgb(168, 85, 247);
+      color: white;
+    }
+  }
+}
+// .card {
+// width: 280px;
+// max-height: max-content;
+// // background-color: orange;
+// display: grid;
+// border-radius: 0.4rem;
+// grid-template-rows: max-content 1fr;
+
+// .info-wrap {
+//   display: flex;
+//   flex-direction: column;
+//   padding: 0.5rem 1rem 1rem 1rem;
+//   color: rgba(0, 0, 0, 0.801);
+// }
+// .title {
+//   font-size: 1.5rem;
+//   color: black;
+//   font-weight: 800;
+//   margin-bottom: 1rem;
+// }
+// .rank {
+//   background-color: white;
+//   padding: 0.5rem 0.8rem;
+//   width: 100%;
+//   border-radius: inherit;
+//   border-top-left-radius: 0;
+//   border-top-right-radius: 0;
+//   text-align: center;
+//   font-size: 2rem;
+//   margin: auto 0 0 0;
+// }
+// .img-wrap {
+//   border-radius: inherit;
+//   height: 300px;
+//   overflow: hidden;
+//   width: 100%;
+//   border-bottom-left-radius: 0;
+//   border-bottom-right-radius: 0;
+//   img {
+//     height: 100%;
+//     width: 100%;
+//     object-position: 50% 0;
+//     object-fit: cover;
+//     width: 100%;
+//     border-radius: inherit;
+//   }
+// }
+// }

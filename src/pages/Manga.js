@@ -1,21 +1,22 @@
 import { useParams } from 'react-router';
 import useSingleDataFetch from '../hooks/useSingleDataFetch';
-import BackButton from '../components/MoreInfo/BackButton';
+import BackButton from '../components/BackButton';
 const Manga = () => {
   const { id } = useParams();
 
-  const { data, loading } = useSingleDataFetch('manga', id);
+  const { data, loading, err } = useSingleDataFetch('manga', id);
   return (
     <div className="max-w-4xl w-full p-4 mb-8 relative z-0 flex flex-col">
       <BackButton />
       {loading && <h1 className="text-white text-center">Loading...</h1>}
+      {!loading && err && <h1 className="err w-max m-auto">{err}</h1>}
       {data && (
         <div className="text-gray-300 self-start mt-4">
           <div className="top flex flex-col sm:flex-row">
             <img
               src={data.images.jpg.image_url}
               alt={data.title}
-              className="w-48 m-auto sm:m-0"
+              className="w-48 m-auto sm:m-0 h-full"
             />
             <div className="info-wrap ml-0 sm:ml-4">
               <h1 className="text-4xl text-white text-center my-3 sm:text-left sm:my-1">

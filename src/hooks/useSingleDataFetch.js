@@ -7,6 +7,7 @@ const useSingleDataFetch = (type, id) => {
   const [err, setErr] = useState('Failed to Fetch Data');
 
   useEffect(() => {
+    setLoading(true);
     axios
       .request(`https://api.jikan.moe/v4/${type}/${id}`)
       .then((res) => {

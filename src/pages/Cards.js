@@ -19,7 +19,7 @@ const Cards = () => {
         <Link to={`/${type}/${+id + 1}`}>&rarr;</Link>
       </div>
       {loading && <h1 className="loading">Loading...</h1>}
-      {!loading && err && <h1 className="err">{err}</h1>}
+      {!loading && err && <h1 className="err w-max m-auto">{err}</h1>}
       {!loading && !err && (
         <div className="cards max-w-screen-lg flex flex-wrap justify-center w-full my-8 gap-8 px-8">
           {results.map((data) => {
