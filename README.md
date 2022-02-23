@@ -25,6 +25,7 @@ Future Mini Goals 👷‍♂️
   - email verification
   - adding 'heart'(favorite) button to single anime & manga page (must)
   - adding profile pic (unlinkely tho)
+  - loading when review is being submitted
 
 [GitHub Pages for v1.0](https://sunil-sharma-999.github.io/animanga/)
 
