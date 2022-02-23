@@ -8,7 +8,6 @@ import Favorites from './Favorites';
 const ProfileDetail = () => {
   const { logOutHandler } = authHelperFunc();
   const { userData } = useGetDoc('users');
-  console.log(process.env.NODE_ENV);
   const dispatch = useDispatch();
 
   return (
