@@ -10,12 +10,19 @@
 
 ### Versions
 
-- 1.0 - top manga and anime
-  - 1.1 - Anime and Manga page of search
-- 2.0 - Detailed Page of single manga and anime
-### work in progress 🚧
-- 3.0 - Auth and Profile page
-- 4.0 - anime and manga reviews
+- 1.0 
+  - top manga and anime
+  - search functionality
+- 2.0
+  - Detailed Page of single manga and anime
+  - authenticationn
+  - Reviews functionality
+  - Keeping favorite functionality
+
+Future mini goals
+  - delete review functionality (must)
+  - adding 'heart'(favorite) button to single anime & manga page (must)
+  - adding profile pic (unlinkely tho)
 
 [GitHub Pages Link](https://sunil-sharma-999.github.io/animanga/)
 
