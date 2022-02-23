@@ -25,6 +25,7 @@ Future Mini Goals 👷‍♂️
   - adding profile pic (unlinkely tho)
 
 [GitHub Pages for v1.0](https://sunil-sharma-999.github.io/animanga/)
+
 [Vercel for 2.0](https://animanga-kohl.vercel.app)
 
 Made by: [Sunil Sharma](https://linktr.ee/Sunil.sharma.9)
