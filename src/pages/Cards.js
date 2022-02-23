@@ -2,12 +2,20 @@ import { Outlet, useParams } from 'react-router';
 import useFetch from '../hooks/useFetch';
 import { Link } from 'react-router-dom';
 import Card from '../components/Card';
+import { useSelector } from 'react-redux';
+import { dateConvertor } from '../helper/dateConvertor';
+import Loading from '../UI/Loading';
 
 const Cards = () => {
   const { id } = useParams(1);
   const { data: results, loading, err, type } = useFetch(id);
-  const validDate =
-    !!results.length && isNaN(Date.parse(results[0].start_date));
+
+  const {
+    userData: { favList },
+  } = useSelector((state) => state);
+
+  const dateType = !!results.length && isNaN(Date.parse(results[0].start_date));
+
   return (
     <>
       <div className="arrows max-w-screen-lg flex justify-between text-white w-10/12 mt-8">
@@ -18,24 +26,20 @@ const Cards = () => {
         </Link>
         <Link to={`/${type}/${+id + 1}`}>&rarr;</Link>
       </div>
-      {loading && <h1 className="loading">Loading...</h1>}
+      {loading && <Loading />}
       {!loading && err && <h1 className="err w-max m-auto">{err}</h1>}
+
       {!loading && !err && (
-        <div className="cards max-w-screen-lg flex flex-wrap justify-center w-full my-8 gap-8 px-8">
+        <div className="cards max-w-screen-lg flex flex-wrap justify-center w-full my-8 gap-8 px-8 animate-[comeup_500ms_ease-in-out_normal]">
           {results.map((data) => {
-            const date = validDate
-              ? (data.start_date + '-' + data.end_date).toString()
-              : new Date(data.start_date).toLocaleDateString('en-US', {
-                  month: 'short',
-                  year: 'numeric',
-                }) +
-                '-' +
-                new Date(data.end_date).toLocaleDateString('en-US', {
-                  month: 'short',
-                  year: 'numeric',
-                });
             return (
-              <Card key={data.mal_id} data={data} date={date} type={type} />
+              <Card
+                key={data.mal_id}
+                data={data}
+                date={dateConvertor(dateType, data.start_date, data.end_date)}
+                type={type}
+                fav={favList && favList.includes(data.mal_id)}
+              />
             );
           })}
         </div>

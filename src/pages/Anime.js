@@ -1,14 +1,24 @@
 import { useParams } from 'react-router';
 import useSingleDataFetch from '../hooks/useSingleDataFetch';
 import BackButton from '../components/BackButton';
+import Reviews from '../components/Reviews';
+import Loading from '../UI/Loading';
+import { useSelector } from 'react-redux';
+
 const Anime = () => {
   const { id } = useParams();
 
-  const { data, loading, err } = useSingleDataFetch('anime', id);
+  const { data, loading, err, reviews, isDocNull } = useSingleDataFetch(
+    'anime',
+    id,
+  );
+
+  const authState = useSelector((state) => state.authCheck);
+
   return (
     <div className="max-w-4xl w-full p-4 mb-8 relative text-white z-0 flex flex-col">
       <BackButton />
-      {loading && <h1 className=" text-center">Loading...</h1>}
+      {loading && <Loading />}
       {!loading && err && <h1 className="err w-max m-auto">{err}</h1>}
       {data && (
         <div className="text-gray-300 self-start mt-4">
@@ -92,6 +102,13 @@ const Anime = () => {
                 <p>{data.background}</p>
               </div>
             )}
+            <Reviews
+              reviews={reviews}
+              isDocNull={isDocNull}
+              authState={authState}
+              mal_id={data.mal_id}
+              type="anime"
+            />
           </div>
         </div>
       )}

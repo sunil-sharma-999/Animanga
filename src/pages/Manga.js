@@ -1,14 +1,24 @@
 import { useParams } from 'react-router';
 import useSingleDataFetch from '../hooks/useSingleDataFetch';
 import BackButton from '../components/BackButton';
+import Reviews from '../components/Reviews';
+import Loading from '../UI/Loading';
+import { useSelector } from 'react-redux';
+
 const Manga = () => {
   const { id } = useParams();
 
-  const { data, loading, err } = useSingleDataFetch('manga', id);
+  const { data, loading, err, reviews, isDocNull } = useSingleDataFetch(
+    'manga',
+    id,
+  );
+
+  const authState = useSelector((state) => state.authCheck);
+
   return (
     <div className="max-w-4xl w-full p-4 mb-8 relative z-0 flex flex-col">
       <BackButton />
-      {loading && <h1 className="text-white text-center">Loading...</h1>}
+      {loading && <Loading />}
       {!loading && err && <h1 className="err w-max m-auto">{err}</h1>}
       {data && (
         <div className="text-gray-300 self-start mt-4">
@@ -80,16 +90,27 @@ const Manga = () => {
             </div>
           </div>
           <div className="bottom mt-4">
-            <div className="text-block max-w-5xl">
-              <p className="text-xl text-white ">Synopsis</p>
-              <hr className="text-white my-2" />
-              <p>{data.synopsis}</p>
-            </div>
-            <div className="text-block mt-4 max-w-5xl">
-              <p className="text-xl text-white ">Background</p>
-              <hr className="text-white my-2" />
-              <p>{data.background}</p>
-            </div>
+            {data.synopsis && (
+              <div className="text-block max-w-5xl">
+                <p className="text-xl text-white ">Synopsis</p>
+                <hr className="text-white my-2" />
+                <p>{data.synopsis}</p>
+              </div>
+            )}
+            {data.background && (
+              <div className="text-block mt-4 max-w-5xl">
+                <p className="text-xl text-white ">Background</p>
+                <hr className="text-white my-2" />
+                <p>{data.background}</p>
+              </div>
+            )}
+            <Reviews
+              reviews={reviews}
+              isDocNull={isDocNull}
+              mal_id={data.mal_id}
+              type="manga"
+              authState={authState}
+            />
           </div>
         </div>
       )}

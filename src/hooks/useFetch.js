@@ -8,7 +8,9 @@ const useFetch = (page = 1) => {
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState('Failed to Fetch Data');
   const { query, type, data } = useSelector((state) => state.animanga);
+
   const dispatch = useDispatch();
+
   useEffect(() => {
     setLoading(true);
     const options = {
@@ -29,7 +31,11 @@ const useFetch = (page = 1) => {
       })
       .catch(function (error) {
         setLoading(false);
-        setErr(error.response.statusText);
+        if (!error.response) {
+          setErr(error.message);
+        } else {
+          setErr(error.response.statusText);
+        }
       });
   }, [type, page, query, dispatch]);
   return { data, loading, err, type };
