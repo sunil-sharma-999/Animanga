@@ -4,9 +4,6 @@ import { useNavigate } from 'react-router';
 import addReview from '../helper/addReview';
 
 const ReviewForm = (props) => {
-  //  const [error, setfirst] = useState(null)
-  //  const [error, setfirst] = useState(null)
-
   const [value, setvalue] = useState(localStorage.getItem('review'));
 
   const { username } = useSelector((state) => state.userData);
@@ -39,7 +36,7 @@ const ReviewForm = (props) => {
           e,
         ).then((res) => navigate(0));
       }}
-      className="text-white flex w-screen max-w-xl flex-col mx-auto">
+      className="text-white flex w-screen max-w-xs sm:max-w-sm md:max-w-lg flex-col mx-auto">
       <textarea
         name="review"
         defaultValue={value}
