@@ -21,6 +21,8 @@
 
 Future Mini Goals 👷‍♂️
   - delete review functionality (must)
+  - nested link active classname
+  - email verification
   - adding 'heart'(favorite) button to single anime & manga page (must)
   - adding profile pic (unlinkely tho)
 
