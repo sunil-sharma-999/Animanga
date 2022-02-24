@@ -18,7 +18,7 @@ const Review = ({
           <Link
             to={`/edit/${type}/${mal_id}`}
             className="bg-purple-700 w-max my-2 px-2 py-1 text-white rounded-sm self-end">
-            {!!myreview ? 'Update' : 'Add'} Review
+            {!!myreview.review ? 'Update' : 'Add'} Review
           </Link>
         )}
 

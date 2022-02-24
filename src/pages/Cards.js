@@ -8,21 +8,20 @@ import Loading from '../UI/Loading';
 
 const Cards = ({ typename }) => {
   const { id } = useParams(1);
-  const { data: results, loading, err, type } = useFetch(typename, id);
+  const { data: results, loading, err } = useFetch(typename, id);
 
   const { favList } = useSelector((state) => state.userData);
 
   const dateType = !!results.length && isNaN(Date.parse(results[0].start_date));
-
   return (
     <>
       <div className="arrows max-w-screen-lg flex justify-between text-white w-10/12 mt-8">
         <Link
           className={id === '1' || !id ? 'disabled' : ''}
-          to={`/${type}/${+id - 1}`}>
+          to={`/${typename}/${+id - 1}`}>
           &larr;
         </Link>
-        <Link to={`/${type}/${+id + 1}`}>&rarr;</Link>
+        <Link to={`/${typename}/${+id + 1}`}>&rarr;</Link>
       </div>
       {loading && <Loading />}
       {!loading && err && <h1 className="err w-max m-auto">{err}</h1>}
@@ -35,8 +34,8 @@ const Cards = ({ typename }) => {
                 key={data.mal_id}
                 data={data}
                 date={dateConvertor(dateType, data.start_date, data.end_date)}
-                type={type}
-                fav={favList && favList.includes(data.mal_id)}
+                type={typename}
+                fav={favList && favList.includes(`${typename}:${data.mal_id}`)}
               />
             );
           })}

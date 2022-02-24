@@ -13,6 +13,5 @@ export const dateConvertor = (validDate, startDate, endDate) => {
         month: 'short',
         year: 'numeric',
       });
-
   return date;
 };

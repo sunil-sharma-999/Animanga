@@ -2,8 +2,10 @@ import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router';
 import addReview from '../helper/addReview';
+import { deleteReview } from '../helper/deleteReview';
 import Loading from '../UI/Loading';
 import BackButton from './BackButton';
+import { AiFillDelete } from 'react-icons/ai';
 
 const ReviewForm = () => {
   const [value, setvalue] = useState();
@@ -19,9 +21,12 @@ const ReviewForm = () => {
   const { type, id } = useParams();
 
   useLayoutEffect(() => {
-    localStorage.setItem('review', myreview || 'Write your Review ( *︾▽︾)');
+    localStorage.setItem(
+      'review',
+      myreview.review || 'Write your Review ( *︾▽︾)',
+    );
     setvalue(localStorage.getItem('review'));
-  }, [myreview]);
+  }, [myreview.review]);
 
   useEffect(() => {
     const timeOut = setTimeout(
@@ -33,32 +38,53 @@ const ReviewForm = () => {
 
   const navigate = useNavigate();
 
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    const name = e.nativeEvent.submitter.name;
+    if (name === 'delete') {
+      setIsLoading(true);
+      setErr(false);
+
+      deleteReview({
+        collectionName: type + ':' + id,
+        authState,
+      })
+        .then((res) => {
+          setIsLoading(false);
+          navigate(`/${type}/id/${id}`);
+        })
+        .catch((err) => {
+          setIsLoading(false);
+          setErr(err.message);
+        });
+    } else {
+      setIsLoading(true);
+      setErr(false);
+      await addReview({
+        authState,
+        username,
+
+        collectionName: type + ':' + id,
+        e,
+      })
+        .then(() => {
+          setIsLoading(false);
+          navigate(`/${type}/id/${id}`);
+        })
+        .catch((error) => {
+          setIsLoading(false);
+          setErr(error.message);
+        });
+    }
+  };
+
   return (
     <div className="review-wrap mt-10 w-full max-w-5xl md:max-w-3xl lg:max-w-5xl p-10 pt-0">
       <BackButton />
       {isLoading && <Loading />}
       {!isLoading && err && <h1 className="err  mx-auto">{err}</h1>}
       <form
-        onSubmit={async (e) => {
-          setIsLoading(true);
-          setErr(false);
-          await addReview({
-            authState,
-            username,
-            isDocNull: !currentItemReviews.length,
-            collectionName: type + ':' + id,
-            e,
-          })
-            .then(() => {
-              setIsLoading(false);
-              navigate(`/${type}/id/${id}`);
-            })
-            .catch((error) => {
-              console.log('first');
-              setIsLoading(false);
-              setErr(error.message);
-            });
-        }}
+        onSubmit={submitHandler}
         className="text-white flex w-full mx-auto flex-col my-5">
         <textarea
           name="review"
@@ -69,9 +95,23 @@ const ReviewForm = () => {
           required
           minLength="5"
         />
-        <button className="bg-purple-700 w-max my-2 px-2 py-1 rounded-sm self-end">
-          Submit Review
-        </button>
+        <div
+          className={`btn-wrap flex ${
+            !!myreview.review ? 'justify-between' : 'justify-end'
+          }`}>
+          {!!myreview.review && (
+            <button
+              name="delete"
+              className="bg-rose-700 w-max my-2 px-2 py-1 rounded-sm">
+              <AiFillDelete />
+            </button>
+          )}
+          <button
+            name="add"
+            className="bg-purple-700 w-max my-2 px-2 py-1 rounded-sm">
+            Submit Review
+          </button>
+        </div>
       </form>
     </div>
   );

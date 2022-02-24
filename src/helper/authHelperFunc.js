@@ -35,7 +35,6 @@ const authHelperFunc = () => {
       } catch (err) {
         seterror(err.code.split('/')[1]);
         setloading(false);
-        console.log(err);
       }
     } else {
       setloading(false);
@@ -84,7 +83,6 @@ const authHelperFunc = () => {
           .catch((err) => {
             seterror(err.code);
             setloading(false);
-            console.log(err);
           });
       } else {
         seterror('Passwords do not match');

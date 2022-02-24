@@ -7,7 +7,7 @@ import { animangaActions } from '../store/slices/animangaSlice';
 const useFetch = (typename, page = 1) => {
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState('Failed to Fetch Data');
-  const { query, type, data } = useSelector((state) => state.animanga);
+  const { query, data } = useSelector((state) => state.animanga);
 
   const dispatch = useDispatch();
 
@@ -38,7 +38,7 @@ const useFetch = (typename, page = 1) => {
         }
       });
   }, [typename, page, query, dispatch]);
-  return { data, loading, err, type };
+  return { data, loading, err };
 };
 
 export default useFetch;

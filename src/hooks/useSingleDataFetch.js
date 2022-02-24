@@ -39,25 +39,29 @@ const useSingleDataFetch = (type, id) => {
         .then((res) => {
           if (res.exists()) {
             const results = res.data();
+            dispatch(addMyreview([]));
             const data = Object.entries(results)
               .map(([key, re]) => {
                 const isAuthor = key === authState;
-                isAuthor
-                  ? dispatch(addMyreview(re.review))
-                  : dispatch(addMyreview(''));
+                isAuthor &&
+                  dispatch(
+                    addMyreview({ review: re.review, username: re.username }),
+                  );
 
                 return {
                   ...re,
                   id: re.date.seconds,
                   areYouAuthor: isAuthor,
+                  seconds: re.date.seconds,
                   date: new Date(re.date.seconds * 1000).toLocaleString(),
                 };
               })
-              .sort((a, b) => b.areYouAuthor - a.areYouAuthor);
+              .sort((a, b) => (b.areYouAuthor ? 1 : -1));
+
             dispatch(addCurrentReview(data));
           } else {
             dispatch(addCurrentReview([]));
-            dispatch(addMyreview(''));
+            dispatch(addMyreview([]));
           }
         })
         .catch((err) => console.log(err));
