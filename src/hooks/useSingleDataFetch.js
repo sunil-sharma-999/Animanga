@@ -19,7 +19,6 @@ const useSingleDataFetch = (type, id) => {
   useEffect(() => {
     setErr(null);
     setLoading(true);
-    console.log('object');
     axios
       .request(`https://api.jikan.moe/v4/${type}/${id}`)
       .then((res) => {
@@ -43,10 +42,9 @@ const useSingleDataFetch = (type, id) => {
             const data = Object.entries(results)
               .map(([key, re]) => {
                 const isAuthor = key === authState;
-
-                if (isAuthor) {
-                  dispatch(addMyreview(re.review));
-                }
+                isAuthor
+                  ? dispatch(addMyreview(re.review))
+                  : dispatch(addMyreview(''));
 
                 return {
                   ...re,

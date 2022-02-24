@@ -1,15 +1,15 @@
 import React, { useRef } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import { animangaActions } from '../store/slices/animangaSlice';
 
 const Navbar = () => {
   const { type } = useSelector((state) => state.animanga);
-
   const dispatch = useDispatch();
   const inputRef = useRef('');
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const handler = (e) => {
     e.preventDefault();
@@ -30,27 +30,32 @@ const Navbar = () => {
           <h1>Animanga</h1>
         </Link>
         <div className="links sm:mr-auto">
-          <NavLink
+          <Link
             to="/manga/1"
-            activeclassname="active"
-            className="text-white mr-3 "
+            className={`text-white mr-3 ${
+              pathname.includes('manga') ? 'active' : ''
+            }`}
             onClick={() => dispatch(animangaActions.typeSet('manga'))}>
             Manga
-          </NavLink>
+          </Link>
 
-          <NavLink
+          <Link
             to="/anime/1"
-            className="text-white mr-3"
-            activeclassname="active"
+            className={`text-white mr-3 ${
+              pathname.includes('anime') ? 'active' : ''
+            }`}
+            // activeclassname="active"
             onClick={() => dispatch(animangaActions.typeSet('anime'))}>
             Anime
-          </NavLink>
-          <NavLink
+          </Link>
+          <Link
             to="/profile"
-            activeclassname="active"
-            className="text-white mr-3">
+            // activeclassname="active"
+            className={`text-white mr-3 ${
+              pathname.includes('profile') ? 'active' : ''
+            }`}>
             Profile
-          </NavLink>
+          </Link>
         </div>
         <form onSubmit={handler} className="ml-0 my-2">
           <input

@@ -18,23 +18,17 @@ const addFavorites = async (data, authCheck) => {
     .then(async (res) => {
       const resData = res.data();
 
-      let exist;
-      if (!resData.favList) {
-        exist = false;
-      } else {
-        exist =
-          !!resData.favList.filter((fav) => fav === data.mal_id).length && true;
-      }
+      let exist =
+        !!resData.favList.filter((fav) => fav === data.mal_id).length && true;
 
       const updatedValue = exist
         ? { favorites: arrayRemove(data), favList: arrayRemove(data.mal_id) }
         : { favorites: arrayUnion(data), favList: arrayUnion(data.mal_id) };
 
-      updateDoc(docRef, updatedValue);
+      await updateDoc(docRef, updatedValue);
     })
     .catch((err) => console.log(err));
-
-  return await getDoc(docRef);
+  return 'success';
 };
 
 export default addFavorites;

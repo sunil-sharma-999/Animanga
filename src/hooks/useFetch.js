@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { animangaActions } from '../store/slices/animangaSlice';
 
-const useFetch = (page = 1) => {
+const useFetch = (typename, page = 1) => {
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState('Failed to Fetch Data');
   const { query, type, data } = useSelector((state) => state.animanga);
@@ -16,8 +16,8 @@ const useFetch = (page = 1) => {
     const options = {
       method: 'GET',
       url: !query
-        ? `https://api.jikan.moe/v3/top/${type}/${page}`
-        : `https://api.jikan.moe/v3/search/${type}`,
+        ? `https://api.jikan.moe/v3/top/${typename}/${page}`
+        : `https://api.jikan.moe/v3/search/${typename}`,
       params: query && { q: query, page: page },
     };
 
@@ -37,7 +37,7 @@ const useFetch = (page = 1) => {
           setErr(error.response.statusText);
         }
       });
-  }, [type, page, query, dispatch]);
+  }, [typename, page, query, dispatch]);
   return { data, loading, err, type };
 };
 

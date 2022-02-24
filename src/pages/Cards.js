@@ -6,13 +6,11 @@ import { useSelector } from 'react-redux';
 import { dateConvertor } from '../helper/dateConvertor';
 import Loading from '../UI/Loading';
 
-const Cards = () => {
+const Cards = ({ typename }) => {
   const { id } = useParams(1);
-  const { data: results, loading, err, type } = useFetch(id);
+  const { data: results, loading, err, type } = useFetch(typename, id);
 
-  const {
-    userData: { favList },
-  } = useSelector((state) => state);
+  const { favList } = useSelector((state) => state.userData);
 
   const dateType = !!results.length && isNaN(Date.parse(results[0].start_date));
 

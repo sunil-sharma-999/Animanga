@@ -19,8 +19,8 @@ const App = () => {
         <Route path="/profile" element={<Profile />} />
         <Route path="/manga/id/:id" element={<Manga />} />
         <Route path="/anime/id/:id" element={<Anime />} />
-        <Route path="/manga/:id" element={<Cards />} />
-        <Route path="/anime/:id" element={<Cards />} />
+        <Route exact path="/manga/:id" element={<Cards typename="manga" />} />
+        <Route exact path="/anime/:id" element={<Cards typename="anime" />} />
         <Route path="/edit/:type/:id" element={<ReviewForm />} />
         <Route path="*" element={<Navigate replace to="/manga/1" exact />} />
       </Routes>

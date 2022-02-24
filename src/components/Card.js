@@ -26,9 +26,11 @@ const Card = (props) => {
           )}
           <div
             className="fav cursor-pointer"
-            onClick={() => {
-              addFavorites(props.data, authCheck)
-                .then((res) => dispatch(userActions.setData(res.data())))
+            onClick={async () => {
+              dispatch(userActions.updateFavorite(props.data));
+
+              await addFavorites(props.data, authCheck)
+                .then((res) => console.log(res))
                 .catch((err) => alert(err.message));
             }}>
             {props.fav ? (
