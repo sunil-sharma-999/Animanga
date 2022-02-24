@@ -6,6 +6,7 @@ import Anime from './pages/Anime';
 import Profile from './pages/Profile';
 import useAuthCheck from './hooks/useAuthCheck';
 import useGetDoc from './hooks/useGetDoc';
+import ReviewForm from './components/ReviewForm';
 
 const App = () => {
   useAuthCheck();
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="/anime/id/:id" element={<Anime />} />
         <Route path="/manga/:id" element={<Cards />} />
         <Route path="/anime/:id" element={<Cards />} />
+        <Route path="/edit/:type/:id" element={<ReviewForm />} />
         <Route path="*" element={<Navigate replace to="/manga/1" exact />} />
       </Routes>
     </div>
