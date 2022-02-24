@@ -58,6 +58,7 @@ const Navbar = () => {
             type="text"
             ref={inputRef}
             placeholder="search and Enter"
+            minLength={3}
           />
         </form>
       </nav>

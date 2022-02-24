@@ -34,7 +34,7 @@ const ReviewForm = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="review-wrap mt-16 w-full max-w-5xl md:max-w-3xl lg:max-w-5xl p-10">
+    <div className="review-wrap mt-10 w-full max-w-5xl md:max-w-3xl lg:max-w-5xl p-10 pt-0">
       <BackButton />
       {isLoading && <Loading />}
       {!isLoading && err && <h1 className="err  mx-auto">{err}</h1>}
@@ -49,7 +49,7 @@ const ReviewForm = () => {
             collectionName: type + ':' + id,
             e,
           })
-            .then((res) => {
+            .then(() => {
               setIsLoading(false);
               navigate(`/${type}/id/${id}`);
             })
@@ -67,7 +67,7 @@ const ReviewForm = () => {
           type="text"
           className="text-black outline-none px-4 py-1 h-56 rounded-sm"
           required
-          minLength="10"
+          minLength="5"
         />
         <button className="bg-purple-700 w-max my-2 px-2 py-1 rounded-sm self-end">
           Submit Review
