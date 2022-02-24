@@ -3,17 +3,11 @@ import useSingleDataFetch from '../hooks/useSingleDataFetch';
 import BackButton from '../components/BackButton';
 import Reviews from '../components/Reviews';
 import Loading from '../UI/Loading';
-import { useSelector } from 'react-redux';
 
 const Anime = () => {
   const { id } = useParams();
 
-  const { data, loading, err, reviews, isDocNull } = useSingleDataFetch(
-    'anime',
-    id,
-  );
-
-  const authState = useSelector((state) => state.authCheck);
+  const { data, loading, err, reviews } = useSingleDataFetch('anime', id);
 
   return (
     <div className="max-w-4xl w-full p-4 mb-8 relative text-white z-0 flex flex-col">
@@ -102,13 +96,7 @@ const Anime = () => {
                 <p>{data.background}</p>
               </div>
             )}
-            <Reviews
-              reviews={reviews}
-              isDocNull={isDocNull}
-              authState={authState}
-              mal_id={data.mal_id}
-              type="anime"
-            />
+            <Reviews reviews={reviews} mal_id={data.mal_id} type="anime" />
           </div>
         </div>
       )}

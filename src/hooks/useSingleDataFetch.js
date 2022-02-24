@@ -14,14 +14,12 @@ const useSingleDataFetch = (type, id) => {
   const [err, setErr] = useState('Failed to Fetch Data');
   const reviews = useSelector((state) => state.reviews);
   const authState = useAuthCheck();
-
-  const [isDocNull, setISDocNull] = useState(true);
   const dispatch = useDispatch();
 
   useEffect(() => {
     setErr(null);
     setLoading(true);
-
+    console.log('object');
     axios
       .request(`https://api.jikan.moe/v4/${type}/${id}`)
       .then((res) => {
@@ -41,12 +39,10 @@ const useSingleDataFetch = (type, id) => {
       getDoc(doc(db, 'reviews', type + ':' + id))
         .then((res) => {
           if (res.exists()) {
-            setISDocNull(false);
             const results = res.data();
-            const keys = Object.keys(results);
-            const data = Object.values(results)
-              .map((re, i) => {
-                const isAuthor = keys[i] === authState;
+            const data = Object.entries(results)
+              .map(([key, re]) => {
+                const isAuthor = key === authState;
 
                 if (isAuthor) {
                   dispatch(addMyreview(re.review));
@@ -70,7 +66,7 @@ const useSingleDataFetch = (type, id) => {
     }
   }, [id, type, authState, dispatch]);
 
-  return { data, loading, err, reviews, isDocNull, authState };
+  return { data, loading, err, reviews };
 };
 
 export default useSingleDataFetch;

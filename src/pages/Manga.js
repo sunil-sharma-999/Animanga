@@ -3,17 +3,11 @@ import useSingleDataFetch from '../hooks/useSingleDataFetch';
 import BackButton from '../components/BackButton';
 import Reviews from '../components/Reviews';
 import Loading from '../UI/Loading';
-import { useSelector } from 'react-redux';
 
 const Manga = () => {
   const { id } = useParams();
 
-  const { data, loading, err, reviews, isDocNull } = useSingleDataFetch(
-    'manga',
-    id,
-  );
-
-  const authState = useSelector((state) => state.authCheck);
+  const { data, loading, err, reviews } = useSingleDataFetch('manga', id);
 
   return (
     <div className="max-w-4xl w-full p-4 mb-8 relative z-0 flex flex-col">
@@ -104,13 +98,7 @@ const Manga = () => {
                 <p>{data.background}</p>
               </div>
             )}
-            <Reviews
-              reviews={reviews}
-              isDocNull={isDocNull}
-              mal_id={data.mal_id}
-              type="manga"
-              authState={authState}
-            />
+            <Reviews reviews={reviews} mal_id={data.mal_id} type="manga" />
           </div>
         </div>
       )}
