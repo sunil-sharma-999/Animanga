@@ -27,25 +27,25 @@ const Anime = () => {
       {data && (
         <div className="text-gray-300 self-start mt-4">
           <div className="top flex flex-col sm:flex-row">
-            <div className="image-wrap w-60 m-auto sm:mx-0 items-center  h-full flex flex-col">
+            <div className="image-wrap w-58 m-auto sm:mx-0 items-center  h-full flex flex-col">
               <img
                 src={data.images.jpg.image_url}
                 alt={data.title}
                 className="w-full h-full"
               />
               <div
-                className="fav overflow-hidden rounded-sm bg-white w-full text-3xl mt-2 text-black cursor-pointer"
+                className="fav overflow-hidden rounded-sm bg-white w-full text-4xl mt-2 text-black cursor-pointer py-1"
                 onClick={async () => {
                   if (authCheck) {
                     dispatch(
                       userActions.updateFavorite({
                         data: data,
-                        typename: 'manga',
+                        typename: 'anime',
                       }),
                     );
                     await addFavorites({
                       data: data,
-                      typename: 'manga',
+                      typename: 'anime',
                       authCheck,
                     });
                   } else {
