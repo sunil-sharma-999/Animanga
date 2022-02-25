@@ -73,8 +73,7 @@ const authHelperFunc = () => {
               } = await createUserWithEmailAndPassword(auth, email, password);
               await setDoc(doc(db, 'users', uid), {
                 username: username,
-                favorites: [],
-                favList: [],
+                favorites: {},
               });
               seterror(null);
               setloading(false);
