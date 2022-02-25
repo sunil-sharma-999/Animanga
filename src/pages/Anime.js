@@ -54,7 +54,7 @@ const Anime = () => {
                     );
                   }
                 }}>
-                {favList.includes(`manga:${data.mal_id}`) ? (
+                {favList.includes(`anime:${data.mal_id}`) ? (
                   <IoHeartCircleSharp color="red" className="mx-auto" />
                 ) : (
                   <IoHeartCircleSharp className="mx-auto" />
