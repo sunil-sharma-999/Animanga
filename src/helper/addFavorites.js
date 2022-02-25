@@ -2,7 +2,7 @@ import { deleteField, doc, getDoc, updateDoc } from '@firebase/firestore';
 import { db } from '../firebase';
 
 const addFavorites = async ({ data, typename, authCheck }) => {
-  console.log(data);
+
   data = {
     title: data.title,
     mal_id: data.mal_id,
